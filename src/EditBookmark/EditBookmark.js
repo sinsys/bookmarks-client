@@ -25,7 +25,7 @@ class EditBookmark extends Component {
     id: '',
     title: '',
     url: '',
-    description: '',
+    desc: '',
     rating: 1,
   };
 
@@ -48,7 +48,7 @@ class EditBookmark extends Component {
           id: responseData.id,
           title: responseData.title,
           url: responseData.url,
-          description: responseData.description,
+          desc: responseData.desc,
           rating: responseData.rating,
         })
       })
@@ -67,7 +67,7 @@ class EditBookmark extends Component {
   };
 
   handleChangeDescription = e => {
-    this.setState({ description: e.target.value })
+    this.setState({ desc: e.target.value })
   };
 
   handleChangeRating = e => {
@@ -77,8 +77,8 @@ class EditBookmark extends Component {
   handleSubmit = e => {
     e.preventDefault()
     const { bookmarkId } = this.props.match.params
-    const { id, title, url, description, rating } = this.state
-    const newBookmark = { id, title, url, description, rating }
+    const { id, title, url, desc, rating } = this.state
+    const newBookmark = { id, title, url, desc, rating }
     fetch(config.API_ENDPOINT + `/${bookmarkId}`, {
       method: 'PATCH',
       body: JSON.stringify(newBookmark),
@@ -107,7 +107,7 @@ class EditBookmark extends Component {
       id: newFields.id || '',
       title: newFields.title || '',
       url: newFields.url || '',
-      description: newFields.description || '',
+      desc: newFields.desc || '',
       rating: newFields.rating || '',
     })
   }
@@ -117,7 +117,7 @@ class EditBookmark extends Component {
   };
 
   render() {
-    const { error, title, url, description, rating } = this.state
+    const { error, title, url, desc, rating } = this.state
     return (
       <section className='EditBookmark'>
         <h2>Edit bookmark</h2>
@@ -171,7 +171,7 @@ class EditBookmark extends Component {
             <textarea
               name='description'
               id='description'
-              value={description}
+              value={desc}
               onChange={this.handleChangeDescription}
             />
           </div>

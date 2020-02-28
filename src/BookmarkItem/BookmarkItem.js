@@ -11,16 +11,15 @@ function deleteBookmarkRequest(bookmarkId, cb) {
     method: 'DELETE',
     headers: {
       'content-type': 'application/json',
-      'authorization': `bearer ${config.API_KEY}`
+      'Authorization': `Bearer ${config.API_KEY}`
     }
   })
     .then(res => {
       if (!res.ok) {
         return res.json().then(error => Promise.reject(error))
       }
-      return res.json()
     })
-    .then(data => {
+    .then(() => {
       cb(bookmarkId)
     })
     .catch(error => {
@@ -45,7 +44,7 @@ export default function BookmarkItem(props) {
             <Rating value={props.rating} />
           </div>
           <p className='BookmarkItem__description'>
-            {props.description}
+            {props.desc}
           </p>
           <div className='BookmarkItem__buttons'>
             <Link to={`/edit/${props.id}`}>
@@ -78,7 +77,7 @@ BookmarkItem.propTypes = {
   ]).isRequired,
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  desciption: PropTypes.string,
+  desc: PropTypes.string,
   rating: PropTypes.number.isRequired,
   onClickDelete: PropTypes.func,
 }
